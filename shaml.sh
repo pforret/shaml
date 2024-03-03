@@ -72,7 +72,7 @@ function Script:main() {
   all)
     #TIP: use «$script_prefix all» to convert YAML file to level1_level2_key=value lines
     #TIP:> $script_prefix all
-    # shellcheck disable=SC2153
+    # shellcheck disable=SC2153 disable=SC2154
     yaml_to_all "$input" "$PREFIX"
     ;;
 
@@ -80,8 +80,10 @@ function Script:main() {
     #TIP: use «$script_prefix find» to find the value of 1 YAML key in a file
     #TIP:> $script_prefix find key default
     local value
+    # shellcheck disable=SC2153 disable=SC2154
     value="$(yaml_to_all "$input" "$PREFIX" | grep "^$key=" | awk -F= '{print $2}')"
     if [[ -z "$value" ]]; then
+    # shellcheck disable=SC2154
       echo "$default"
     else
       echo "$value"
@@ -118,12 +120,8 @@ function Script:main() {
 #####################################################################
 
 function yaml_to_all() {
-  # Examples of required binaries/scripts and how to install them
   Os:require "sed"
   Os:require "awk"
-  # Os:require "convert" "imagemagick"
-  # Os:require "IO:progressbar" "basher install pforret/IO:progressbar"
-  # (code)
   local yaml_file=$1
   local prefix=$2
   local spaces varName fieldSep
@@ -158,38 +156,8 @@ function yaml_to_all() {
       }
     }
   }'
-
 }
 
-function yaml_to_find() {
-  # Examples of required binaries/scripts and how to install them
-  Os:require "sed"
-  Os:require "awk"
-  # Os:require "convert" "imagemagick"
-  # Os:require "IO:progressbar" "basher install pforret/IO:progressbar"
-  # (code)
-  local yaml_file=$1
-  local prefix=$2
-  local spaces varName fieldSep
-  spaces='[[:space:]]*'
-  varName='[a-zA-Z0-9_]*'
-  fieldSep=$(echo @ | tr @ '\034')
-  # shellcheck disable=SC1087
-  sed -ne "s|^\($spaces\):|\1|" \
-    -e "s|^\($spaces\)\($varName\)$spaces:$spaces[\"']\(.*\)[\"']$spaces\$|\1$fieldSep\2$fieldSep\3|p" \
-    -e "s|^\($spaces\)\($varName\)$spaces:$spaces\(.*\)$spaces\$|\1$fieldSep\2$fieldSep\3|p" \
-    "$yaml_file" |
-    awk -F"$fieldSep" -v prefix="$prefix" '{
-    indent = length($1)/2;
-    vname[indent] = $2;
-    for (i in vname) {if (i > indent) {delete vname[i]}}
-    if (length($3) > 0) {shell
-       vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-       printf("%s%s%s,\"%s\"\n", prefix, vn, $2, $3);
-    }
-  }'
-
-}
 
 #####################################################################
 ################### DO NOT MODIFY BELOW THIS LINE ###################
