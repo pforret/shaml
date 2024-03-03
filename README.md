@@ -49,6 +49,7 @@ Flags, options and parameters:
 
 ## ⚡️ Examples
 
+### `shaml all`
 Input:
 
 ```yaml
@@ -89,6 +90,18 @@ Author_Name="John Doe"
 Author_Address="123 Main St, Anytown, USA"
 Author_Tags_Hobbies+=("Fishing")
 Author_Tags_Hobbies+=("Waterpolo")
+```
+
+### `shaml find`
+
+```bash
+Sentence="$(shaml find input.yaml Sentence)"
+# Sentence="one sentence"
+```
+
+```bash
+Optional="$(shaml find input.yaml Optional "This is the default")"
+# Optional="This is the default"
 ```
 
 
