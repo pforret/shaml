@@ -8,6 +8,8 @@
 
 # shaml
 
+![shaml](assets/url.download.215333.jpg)
+
 Read YAML files within bash
 
 ## 🔥 Usage
@@ -43,12 +45,48 @@ Flags, options and parameters:
 
 ## ⚡️ Examples
 
-```bash
-> shaml -h 
-# get extended usage info
-> shaml env > .env
-# create a .env file with default values
+Input:
+
+```yaml
+# comment start on col 1
+Word: one # comment starts after
+Sentence: "one sentence"
+level1:
+  level2:
+    level3:
+      level4:
+        level5:
+          level6: "sixth level"
+
+Months:
+  - January
+  - February
+  - March
+
+Author:
+  Name: "John Doe"
+  Address: "123 Main St, Anytown, USA"
+  Tags:
+    Hobbies:
+      - "Fishing"
+      - "Waterpolo"
 ```
+
+`shaml all input.yaml` will output:
+
+```bash
+Word="one"
+Sentence="one sentence"
+level1_level2_level3_level4_level5_level6="sixth level"
+Months+=("January")
+Months+=("February")
+Months+=("March")
+Author_Name="John Doe"
+Author_Address="123 Main St, Anytown, USA"
+Author_Tags_Hobbies+=("Fishing")
+Author_Tags_Hobbies+=("Waterpolo")
+```
+
 
 ## 🚀 Installation
 

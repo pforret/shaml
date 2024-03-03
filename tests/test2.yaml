@@ -1,0 +1,22 @@
+# comment start on col 1
+Word: one # comment starts after
+Sentence: "one sentence"
+level1:
+  level2:
+    level3:
+      level4:
+        level5:
+          level6: "sixth level"
+
+Months:
+  - January
+  - February
+  - March
+
+Author:
+  Name: "John Doe"
+  Address: "123 Main St, Anytown, USA"
+  Tags:
+    Hobbies:
+      - "Fishing"
+      - "Waterpolo"
