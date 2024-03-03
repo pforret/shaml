@@ -137,7 +137,6 @@ function yaml_to_all() {
     -e "s|^\($spaces\)\($varName\)$spaces:$spaces\(.*\)$spaces\$|\1$fieldSep\2$fieldSep\3|p" \
     -e "s|^\($spaces\)\($varName\)$spaces-$spaces[\"']\(.*\)[\"']$spaces\$|\1$fieldSep\2$fieldSep\3|p" \
     -e "s|^\($spaces\)\($varName\)$spaces-$spaces\(.*\)$spaces\$|\1$fieldSep\2$fieldSep\3|p" \
-    | tee inter.txt \
     | awk -F"$fieldSep" -v prefixText="$prefix" '
     function join(array, start, end){
         result = array[start] ; for (i = start + 1; i <= end; i++){ result = result "_" array[i] } ; return result
