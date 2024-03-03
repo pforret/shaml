@@ -16,23 +16,27 @@ Read YAML files within bash
 
 ```
 Program : shaml  by peter@forret.com
-Version : v0.0.1 (Apr 22 16:07:13 2023)
+Version : v0.1.0 (Mar  3 16:48:21 2024)
 Purpose : Read YAML files within bash
-Usage   : shaml [-h] [-q] [-v] [-f] [-l <log_dir>] [-t <tmp_dir>] <action>
+Usage   : shaml [-h] [-q] [-v] [-f] [-l <log_dir>] [-t <tmp_dir>] [-P <PREFIX>] <action> <input?> <key?> <default?>
 Flags, options and parameters:
     -h|--help        : [flag] show usage [default: off]
     -q|--quiet       : [flag] no output [default: off]
     -v|--verbose     : [flag] also show debug messages [default: off]
     -f|--force       : [flag] do not ask for confirmation (always yes) [default: off]
-    -l|--log_dir <?> : [option] folder for log files   [default: /Users/pforret/log/script]
-    -t|--tmp_dir <?> : [option] folder for temp files  [default: /tmp/script]
-    <action>         : [choice] action to perform  [options: action1,action2,check,env,update]
-                                  
+    -l|--log_dir <?> : [option] folder for log files   [default: /$HOME/log/shaml]
+    -t|--tmp_dir <?> : [option] folder for temp files  [default: /tmp/shaml]
+    -P|--PREFIX <?>  : [option] variable prefix
+    <action>         : [choice] action to perform  [options: all,find,check,env,update]
+    <input>          : [parameter] input file (optional)
+    <key>            : [parameter] key to find (for shaml find) (optional)
+    <default>        : [parameter] default value (for shaml find) (optional)
+
 ### TIPS & EXAMPLES
-* use shaml action1 to ...
-  shaml action1
-* use shaml action2 to ...
-  shaml action2
+* use shaml all to convert YAML file to level1_level2_key=value lines
+  shaml all
+* use shaml find to find the value of 1 YAML key in a file
+  shaml find key default
 * use shaml check to check if this script is ready to execute and what values the options/flags are
   shaml check
 * use shaml env to generate an example .env file
